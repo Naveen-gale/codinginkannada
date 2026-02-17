@@ -70,26 +70,16 @@ export const contactRouter = async (req, res) => {
             `,
         };
 
-        // Verify transporter connection
-        try {
-            await transporter.verify();
-            console.log("Transporter verification successful");
-        } catch (verifyError) {
-            console.error("Transporter verification failed:", verifyError);
-            // Optionally decide if you want to stop here or continue
-        }
-
-
-
-        try {
-            const info = await transporter.sendMail(mailOptions);
-            console.log("Email sent: " + info.response);
-        } catch (mailError) {
-            console.error("Error sending email:", mailError);
-            fs.appendFileSync("backend_error.log", `Email Error: ${mailError.message}\nStack: ${mailError.stack}\n`);
-            // We can choose to return a warning or partial success, but for now we'll just log it 
-            // so the user knows data is saved but email failed.
-        }
+        // Send email in background (don't await)
+        transporter.sendMail(mailOptions)
+            .then(info => {
+                console.log("Email sent: " + info.response);
+            })
+            .catch(mailError => {
+                console.error("Error sending email:", mailError);
+                // Log to file if needed, but remember this is ephemeral on some hostings
+                // fs.appendFileSync("backend_error.log", ...); 
+            });
 
         res.status(201).json({ message: "Contact form submitted successfully" });
     } catch (error) {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ExternalLink, X, AlertTriangle, ArrowRight, Code2, Server, Layout, Database } from "lucide-react";
 import stylesyncImg from "../assets/stylesync.png";
-import photoShopImg from "../assets/photoShop.png";
+import photoShopImg from "../assets/photoshop.png";
 import karnatakaFcImg from "../assets/restaurant.png";
 
 const projectsData = [

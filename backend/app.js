@@ -3,7 +3,7 @@ import cors from "cors";
 import contactRoutes from "./routes/contact.js";
 import dotenv from "dotenv";
 dotenv.config();
-import axios from "axios";
+
 
 
 const PORT = process.env.PORT || 3000;

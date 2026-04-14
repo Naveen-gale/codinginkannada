@@ -129,7 +129,7 @@ const HeroSec = () => {
               <div className={`md:hidden shrink-0 ml-2 transition-all duration-1000 delay-200 ease-out transform ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
                 <div className="relative w-40 h-40 sm:w-48 sm:h-48">
                   <div className="absolute inset-0 bg-blue-500/30 blur-xl animate-pulse rounded-xl"></div>
-                  <img src={photo} alt="Naveen" className="w-full h-full object-cover rounded-xl border-2 border-white/20 shadow-lg relative z-10" />
+                  <img src={photo} alt="Naveen - Full Stack Developer and Coding in Kannada Founder" className="w-full h-full object-cover rounded-xl border-2 border-white/20 shadow-lg relative z-10" />
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ const HeroSec = () => {
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-2xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
 
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-gray-900 shadow-2xl">
-                <img src={photo} alt="Naveen" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+                <img src={photo} alt="Naveen - MERN Stack and Python Developer" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
               </div>
 
               <div

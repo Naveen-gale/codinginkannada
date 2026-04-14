@@ -106,7 +106,7 @@ const Projects = () => {
 
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} - ${project.category} project by Naveen`}
                     loading="lazy"
                     className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
                   />

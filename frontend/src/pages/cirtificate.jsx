@@ -49,8 +49,9 @@ const Certifications = () => {
   return (
     <div
       id="certifications"
-      className="relative min-h-screen bg-black py-24 px-4 md:px-8 overflow-hidden"
+      className="reveal-section relative min-h-screen bg-black py-24 px-4 md:px-8 overflow-hidden"
     >
+
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] animate-pulse"></div>

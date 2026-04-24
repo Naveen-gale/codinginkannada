@@ -112,7 +112,7 @@ const ProjectCard = ({ project }) => (
 
 const GitHubProjects = () => {
   return (
-    <div className="relative bg-black py-16 overflow-hidden">
+    <div className="reveal-section relative bg-black py-16 overflow-hidden">
       
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
          <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-purple-900/10 rounded-full blur-[100px]"></div>

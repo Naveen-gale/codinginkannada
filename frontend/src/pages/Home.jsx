@@ -8,23 +8,38 @@ import GitHubProjects from '../components/GitHubProjects'
 import Certifications from './cirtificate'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
-const Home = () => {
-    return (
-        <div className='bg-black min-h-screen w-full scroll-smooth text-white'>
-            <NaveBar />
-            <HeroSec />
-            <About />
-            <Skill />
-            
-             <GitHubProjects />
-            <Projects />
-            <Certifications />
-            <Contact />
-            <Footer />  
-          
+import { useScrollReveal } from '../utils/useScrollReveal'
 
+const Home = () => {
+    useScrollReveal('.reveal-section');
+
+    return (
+        <div className='bg-black min-h-screen w-full text-white'>
+            <NaveBar />
+            <div className="reveal-section">
+                <HeroSec />
+            </div>
+            <div className="reveal-section">
+                <About />
+            </div>
+            <div className="reveal-section">
+                <Skill />
+            </div>
+            <div className="reveal-section">
+                <GitHubProjects />
+            </div>
+            <div className="reveal-section">
+                <Projects />
+            </div>
+            <div className="reveal-section">
+                <Certifications />
+            </div>
+            <div className="reveal-section">
+                <Contact />
+            </div>
+            <Footer />  
         </div>
     )
 }
 
-export default Home
+export default Home

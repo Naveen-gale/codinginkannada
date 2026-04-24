@@ -113,7 +113,7 @@ const Skill = () => {
   return (
     <div 
       id="skills"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20 select-none bg-black" 
+      className="reveal-section relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20 select-none bg-black" 
       onMouseDown={(e) => handleStart(e.clientX, e.clientY)}
       onMouseMove={(e) => handleMove(e.clientX, e.clientY)}
       onMouseUp={handleEnd}

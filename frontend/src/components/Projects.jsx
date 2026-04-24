@@ -64,8 +64,9 @@ const Projects = () => {
   return (
     <div
       id="projects"
-      className="relative min-h-screen bg-black py-24 px-4 md:px-8 overflow-hidden"
+      className="reveal-section relative min-h-screen bg-black py-24 px-4 md:px-8 overflow-hidden"
     >
+
       {/* Dynamic Background Atmosphere */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] animate-pulse"></div>

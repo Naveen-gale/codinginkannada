@@ -29,8 +29,9 @@ const About = () => {
   return (
     <div
       id="about"
-      className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden py-24 md:py-32"
+      className="reveal-section relative min-h-screen flex items-center justify-center bg-black overflow-hidden py-24 md:py-32"
     >
+
       {/* ================= BACKGROUND ATMOSPHERE ================= */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] animate-pulse"></div>

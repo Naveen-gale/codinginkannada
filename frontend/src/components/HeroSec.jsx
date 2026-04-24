@@ -77,8 +77,9 @@ const HeroSec = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center bg-black overflow-hidden pt-24 md:pt-20"
+      className="reveal-section relative min-h-[85vh] md:min-h-screen flex items-center justify-center bg-black overflow-hidden pt-24 md:pt-20"
     >
+
       {/* ========= Background Glow (Scroll Parallax + Mouse Parallax) ========= */}
       {/* We apply Scroll Parallax (translateY) to the Wrapper, and Mouse Parallax (translate X/Y) to the Ref */}
       <div

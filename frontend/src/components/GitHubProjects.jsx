@@ -158,25 +158,27 @@ const GitHubProjects = () => {
 
         /* Adjusted animations for smaller cards (need less distance) */
         @keyframes scrollLeft {
-          from { transform: translateX(0); }
-          to { transform: translateX(-25%); } 
+          from { transform: translate3d(0, 0, 0); }
+          to { transform: translate3d(-25%, 0, 0); } 
         }
 
         @keyframes scrollRight {
-          from { transform: translateX(-25%); }
-          to { transform: translateX(0); }
+          from { transform: translate3d(-25%, 0, 0); }
+          to { transform: translate3d(0, 0, 0); }
         }
 
         .animate-scroll-left {
           display: flex;
           animation: scrollLeft 40s linear infinite;
           width: max-content;
+          will-change: transform;
         }
 
         .animate-scroll-right {
           display: flex;
           animation: scrollRight 40s linear infinite;
           width: max-content;
+          will-change: transform;
         }
 
         .animate-scroll-left:hover, 

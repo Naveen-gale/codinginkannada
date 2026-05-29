@@ -52,8 +52,11 @@ const Skill = () => {
     });
 
     let animationFrameId;
+    let isVisible = true;
 
     const animate = () => {
+      if (!isVisible) return; // Pause calculation when section is hidden
+
       if (!isDraggingRef.current) {
         targetRotationRef.current.x *= 0.95;
         targetRotationRef.current.y *= 0.95;
@@ -90,8 +93,19 @@ const Skill = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
-    return () => cancelAnimationFrame(animationFrameId);
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) animate();
+    }, { threshold: 0 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+    };
   }, []);
 
   const handleStart = (clientX, clientY) => {

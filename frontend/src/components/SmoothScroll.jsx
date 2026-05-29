@@ -19,6 +19,7 @@ const SmoothScroll = ({ children }) => {
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
+      autoResize: true,
     });
 
     // Sync ScrollTrigger with Lenis

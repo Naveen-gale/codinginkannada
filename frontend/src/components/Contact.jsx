@@ -21,7 +21,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, formData, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, formData, {
         headers: {
           "Content-Type": "application/json",
         },

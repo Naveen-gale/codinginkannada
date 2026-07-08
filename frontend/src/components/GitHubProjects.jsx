@@ -100,10 +100,10 @@ const ProjectCard = ({ project }) => (
       
       <div className="flex gap-3 text-gray-500 text-[10px] font-medium">
          <span className="flex items-center gap-1 hover:text-yellow-400 transition-colors">
-            <Star size={10} /> <span>{Math.floor(Math.random() * 10) + 1}</span>
+            <Star size={10} /> <span>{(project.name.length * 3) % 10 + 1}</span>
          </span>
          <span className="flex items-center gap-1 hover:text-white transition-colors">
-            <GitFork size={10} /> <span>{Math.floor(Math.random() * 5)}</span>
+            <GitFork size={10} /> <span>{(project.name.length * 2) % 5}</span>
          </span>
       </div>
     </div>

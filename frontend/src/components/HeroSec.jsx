@@ -3,20 +3,21 @@ import photo from "../assets/naveen2.png";
 
 const TECH_STACK = ["Node.js", "Express", "Python", "React", "C", "C++"];
 
+const VerifiedBadge = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1 inline-block -mt-0.5">
+    <path d="M22.5 12.5L20.3 14.9L20.8 18.1L17.7 18.8L15.9 21.4L13 20.2L10.1 21.4L8.3 18.8L5.2 18.1L5.7 14.9L3.5 12.5L5.7 10.1L5.2 6.9L8.3 6.2L10.1 3.6L13 4.8L15.9 3.6L17.7 6.2L20.8 6.9L20.3 10.1L22.5 12.5Z" fill="#1DA1F2" />
+    <path d="M10 15.5L7 12.5L8.4 11.1L10 12.7L16.6 6.1L18 7.5L10 15.5Z" fill="white" />
+  </svg>
+);
+
 const HeroSec = () => {
   // Simple state for a clean fade-in on mount
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoaded(true);
   }, []);
-
-  const VerifiedBadge = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1 inline-block -mt-0.5">
-      <path d="M22.5 12.5L20.3 14.9L20.8 18.1L17.7 18.8L15.9 21.4L13 20.2L10.1 21.4L8.3 18.8L5.2 18.1L5.7 14.9L3.5 12.5L5.7 10.1L5.2 6.9L8.3 6.2L10.1 3.6L13 4.8L15.9 3.6L17.7 6.2L20.8 6.9L20.3 10.1L22.5 12.5Z" fill="#1DA1F2" />
-      <path d="M10 15.5L7 12.5L8.4 11.1L10 12.7L16.6 6.1L18 7.5L10 15.5Z" fill="white" />
-    </svg>
-  );
 
   return (
     <div

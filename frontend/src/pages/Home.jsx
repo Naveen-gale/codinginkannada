@@ -14,7 +14,7 @@ const Home = () => {
     useScrollReveal('.reveal-section');
 
     return (
-        <div className='bg-black min-h-screen w-full text-white'>
+        <div className='bg-[#050505] min-h-screen w-full text-white overflow-x-hidden'>
             <NaveBar />
             <div className="reveal-section">
                 <HeroSec />

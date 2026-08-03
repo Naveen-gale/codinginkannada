@@ -93,14 +93,13 @@ const Skill = () => {
         z = point.y * Math.sin(rotX) + z * Math.cos(rotX);
 
         const radius = containerRef.current ? containerRef.current.offsetWidth / 2.2 : 150;
-        let scale = (z + 2) / 3;
-        let opacity = Math.max(0.15, Math.min(1, scale));
-        const blur = (1 - scale) * 3;
+        const scale = (z + 2) / 3;
+        const opacity = Math.max(0.15, Math.min(1, scale));
 
+        // Only transform + opacity — no filter (filter forces full repaint every frame)
         item.style.transform = `translate3d(${x * radius}px, ${y * radius}px, 0) scale(${scale})`;
         item.style.opacity = opacity;
         item.style.zIndex = Math.floor(scale * 100);
-        item.style.filter = `blur(${blur}px)`;
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -140,7 +139,7 @@ const Skill = () => {
   return (
     <div
       id="skills"
-      className="reveal-section relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20 select-none bg-black"
+      className="reveal-section relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20 select-none bg-[#050505]"
       onMouseDown={(e) => handleStart(e.clientX, e.clientY)}
       onMouseMove={(e) => handleMove(e.clientX, e.clientY)}
       onMouseUp={handleEnd}
@@ -164,7 +163,7 @@ const Skill = () => {
         <div className="inline-block px-3 py-1 mb-4 rounded-full border border-white/10 bg-white/5 text-gray-400 text-xs font-medium uppercase tracking-widest">
           My Tech Stack
         </div>
-        <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white tracking-tighter">
           Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Skills</span>
         </h2>
         <p className="text-gray-500 text-sm mt-3 uppercase tracking-widest animate-pulse">
@@ -194,6 +193,7 @@ const Skill = () => {
               key={index}
               ref={(el) => (itemsRef.current[index] = el)}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform z-10"
+              style={{ willChange: 'transform, opacity' }}
               onMouseEnter={() => {
                 setHoveredSkill(skill);
                 document.body.style.cursor = 'pointer';

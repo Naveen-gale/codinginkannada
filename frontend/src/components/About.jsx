@@ -1,151 +1,173 @@
 import React, { useEffect, useRef } from "react";
 
+/* ─── Content blocks ────────────────────────────────────── */
+const BLOCKS = [
+  {
+    label: "Who I Am",
+    text: `Hi, I'm Naveen, a BCA student from India with a strong passion for Artificial Intelligence, Machine Learning, and Generative AI. I enjoy transforming ideas into real-world AI products by taking projects from concept to deployment. My journey is driven by curiosity, continuous learning, and a desire to build technology that makes a meaningful impact.`,
+  },
+  {
+    label: "What I Focus On",
+    text: `Over the past few years I have focused on developing AI-powered applications, training custom language models, creating high-quality datasets, and deploying scalable AI solutions. I enjoy exploring how Large Language Models can solve practical problems and improve user experiences through intelligent automation.`,
+  },
+  {
+    label: "How I Build",
+    text: `One of my key interests is building custom AI models rather than relying only on existing APIs. I have worked on training GPT-based models, experimenting with fine-tuning techniques, designing datasets, and deploying inference APIs for production use. Alongside AI development, I build full-stack web and mobile applications that integrate machine learning into modern user interfaces.`,
+  },
+  {
+    label: "My Philosophy",
+    text: `I believe the best way to learn is by building. Every project I create helps me deepen my understanding of artificial intelligence, software engineering, and cloud deployment while improving my ability to solve complex technical challenges.`,
+    quote: `"My goal is simple — build software that is fast, useful, and impactful."`,
+  },
+  {
+    label: "My Goal",
+    text: `As an aspiring AI Engineer, my goal is to contribute to the future of Generative AI by building innovative, scalable, and accessible AI products. I am always exploring new technologies, improving my skills, and challenging myself with projects that push the boundaries of what AI can achieve.`,
+  },
+  {
+    label: "Beyond Code",
+    text: `Outside of development, I enjoy learning about emerging AI research, experimenting with new technologies, contributing to personal projects, and sharing knowledge with others. I am committed to continuous growth and excited about creating intelligent solutions that can make a positive impact on people around the world.`,
+  },
+];
+
+const FOCUS_TAGS = [
+  "Generative AI",
+  "LLM Fine-tuning",
+  "MERN Stack",
+  "Python",
+  "Machine Learning",
+  "Cloud Deployment",
+];
+
+/* ─── Component ─────────────────────────────────────────── */
 const About = () => {
-  const observerRef = useRef(null);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
-    // 1. Setup the Intersection Observer (Scroll Animation)
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("show-content");
-            // Optional: Stop observing once shown so it doesn't flicker
-            observerRef.current.unobserve(entry.target);
+            entry.target.classList.add("ab-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15 } // Wait until 15% is visible
+      { threshold: 0.1 }
     );
 
-    const hiddenElements = document.querySelectorAll(".hidden-content");
-    hiddenElements.forEach((el) => observerRef.current.observe(el));
+    const items = sectionRef.current?.querySelectorAll(".ab-item");
+    items?.forEach((el) => observer.observe(el));
 
-    return () => {
-      if (observerRef.current) observerRef.current.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
       id="about"
-      className="reveal-section relative min-h-screen flex items-center justify-center bg-black overflow-hidden py-24 md:py-32"
+      ref={sectionRef}
+      className="reveal-section relative bg-[#050505] py-24 md:py-32 overflow-hidden"
     >
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
-      {/* ================= BACKGROUND ATMOSPHERE ================= */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
-        
-        {/* ================= TITLE HEADER ================= */}
-        <div className="mb-20 md:mb-28 text-left hidden-content opacity-0 translate-y-10 transition-all duration-1000 ease-out">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-400 text-xs font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(59,130,246,0.15)] hover:bg-blue-500/10 transition-colors">
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+        {/* ── Section label ─────────────────────────────── */}
+        <div className="ab-item" style={{ transitionDelay: "0ms" }}>
+          <span className="inline-block px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-gray-300 text-xs font-semibold uppercase tracking-widest mb-6">
             About Me
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-             
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500 drop-shadow-sm">
-              Full Stack Developer
-            </span>
+          </span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+            AI Engineer &amp;{" "}
+            <span className="text-gray-300">Full Stack Developer</span>
           </h2>
+          <p className="mt-4 text-gray-400 text-base font-medium">
+            BCA Student · Hubballi, India
+          </p>
         </div>
 
-        {/* ================= TIMELINE CONTENT ================= */}
-        <div className="relative border-l-2 border-white/5 ml-2  md:ml-4 space-y-20 md:space-y-32">
-          
-          {/* Animated Glowing Line Overlay */}
-          <div className="absolute top-0 -left-[2px] w-[2px] h-full bg-gradient-to-b from-blue-500 via-purple-500 to-transparent opacity-0 transition-opacity duration-1000 show-line"></div>
+        {/* ── Divider ───────────────────────────────────── */}
+        <div className="ab-item my-10 h-px bg-white/8" style={{ transitionDelay: "80ms" }} />
 
-          {/* --- BLOCK 1: INTRO --- */}
-          <div className="relative pl-10 md:pl-16 hidden-content opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-100">
-            {/* Timeline Dot */}
-            <span className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-black border-2 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.6)] z-10"></span>
-            
-            <h3 className="text-2xl md:text-3xl text-white font-bold mb-6 tracking-wide">Who I Am</h3>
-            <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-2xl font-light">
-              Hi, I’m <span className="text-white font-semibold border-b-2 border-blue-500/50 pb-0.5 hover:border-blue-400 transition-colors cursor-default">Naveen</span>. 
-              I am a passionate Full Stack and App Developer who loves building smart, practical digital solutions. 
-              I specialize in <span className="text-blue-400 font-medium">Python, MERN Stack</span>, and system-level programming with C. 
-              I enjoy turning complex ideas into real-world applications.
-            </p>
-          </div>
+        {/* ── Focus tags ────────────────────────────────── */}
+        <div className="ab-item flex flex-wrap gap-2.5 mb-16" style={{ transitionDelay: "140ms" }}>
+          {FOCUS_TAGS.map((tag) => (
+            <span
+              key={tag}
+              className="px-4 py-2 rounded-lg bg-white/6 border border-white/12 text-gray-200 text-sm font-medium hover:bg-white/10 transition-colors cursor-default"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
-          {/* --- BLOCK 2: EDUCATION (Glass Card) --- */}
-          <div className="relative pl-10 md:pl-16 hidden-content opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200">
-             {/* Timeline Dot */}
-             <span className="absolute -left-[9px] top-8 w-4 h-4 rounded-full bg-black border-2 border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.6)] z-10"></span>
+        {/* ── Timeline blocks ───────────────────────────── */}
+        <div className="relative border-l border-white/10 ml-1 space-y-12">
 
-            <div className="group relative p-8 md:p-10 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden hover:bg-white/[0.07] hover:border-white/20 transition-all duration-500 hover:-translate-y-1 shadow-2xl">
-              {/* Inner Glow - Adjusted for smoother feel */}
-              <div className="absolute -right-20 -top-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-all duration-700"></div>
-              
-              <div className="relative z-10">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                  <h4 className="text-2xl md:text-3xl text-white font-bold">BCA Student</h4>
-                  <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 text-xs font-mono text-blue-300 border border-white/10 backdrop-blur-sm">
-                    First Year • Hubballi
-                  </span>
-                </div>
-                
-                <p className="text-gray-300 text-base md:text-lg leading-relaxed font-light mb-8">
-                  Currently pursuing my Bachelor of Computer Applications. I balance my academic studies with hands-on development.
-                  I am also a content creator on <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-400 font-bold hover:brightness-110 transition-all cursor-pointer">Instagram</span>, 
-                  where I share my coding journey.
-                </p>
+          {BLOCKS.map((block, i) => (
+            <div
+              key={block.label}
+              className="ab-item relative pl-8 sm:pl-12"
+              style={{ transitionDelay: `${200 + i * 100}ms` }}
+            >
+              {/* Timeline dot */}
+              <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-[#050505] border-2 border-gray-500" />
 
-                <div className="flex flex-wrap gap-3">
-                  {['Student Management Systems', 'AI & Automation', 'Engineering'].map((tag) => (
-                    <span key={tag} className="px-3 py-1.5 rounded-lg bg-black/40 border border-white/5 text-xs text-gray-400 font-mono hover:text-white hover:border-white/20 transition-colors cursor-default">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* --- BLOCK 3: WHAT I DO --- */}
-          <div className="relative pl-10 md:pl-16 hidden-content opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-300">
-            {/* Timeline Dot */}
-            <span className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-black border-2 border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.6)] z-10"></span>
-
-            <h3 className="text-2xl md:text-3xl text-white font-bold mb-6 tracking-wide">What I Build</h3>
-            <p className="text-gray-400 text-base md:text-xl leading-relaxed mb-10 max-w-3xl font-light">
-              I have built projects ranging from <span className="text-gray-200 font-medium">E-commerce websites <span className="text-gray-400 font-medium">many of them </span></span> to 
-              <span className="text-gray-200 font-medium"> AI-integrated web applications </span> and <span className="text-gray-200 font-medium">apps</span> for <span  className="text-gray-200 font-medium">iOS</span> and <span className="text-gray-200 font-medium">Android</span>. 
-              My focus is always on writing clean code, designing user-friendly interfaces, and delivering reliable backend performance.
-            </p>
-            
-            {/* Quote Block - Enhanced */}
-            <div className="relative p-8 rounded-2xl bg-gradient-to-r from-blue-900/10 to-purple-900/10 border border-white/5 border-l-4 border-l-blue-500 backdrop-blur-sm">
-              <p className="text-gray-200 text-lg md:text-xl italic font-light tracking-wide">
-                "My goal is simple — build software that is fast, useful, and impactful."
+              {/* Block label */}
+              <p className="text-white text-sm font-bold uppercase tracking-widest mb-3">
+                {block.label}
               </p>
-            </div>
-          </div>
 
-          {/* --- BLOCK 4: CTA --- */}
-          <div className="relative pl-10 md:pl-16 pb-10 hidden-content opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-500">
-             <p className="text-gray-500 text-sm font-bold uppercase tracking-[0.25em] animate-pulse hover:text-gray-300 transition-colors cursor-default">
-              Let's create something amazing together.
-            </p>
-          </div>
+              {/* Block text */}
+              <p className="text-gray-300 text-base sm:text-[1.05rem] md:text-lg leading-[1.85] font-light">
+                {block.text}
+              </p>
+
+              {/* Optional quote */}
+              {block.quote && (
+                <blockquote className="mt-6 pl-5 border-l-2 border-gray-600">
+                  <p className="text-white text-base sm:text-lg md:text-xl italic font-normal leading-relaxed">
+                    {block.quote}
+                  </p>
+                </blockquote>
+              )}
+            </div>
+          ))}
 
         </div>
+
+        {/* ── Divider ───────────────────────────────────── */}
+        <div
+          className="ab-item mt-16 h-px bg-white/8"
+          style={{ transitionDelay: `${200 + BLOCKS.length * 100}ms` }}
+        />
+
+        {/* ── Bottom CTA ────────────────────────────────── */}
+        <div
+          className="ab-item mt-10"
+          style={{ transitionDelay: `${260 + BLOCKS.length * 100}ms` }}
+        >
+          <p className="text-gray-400 text-base leading-relaxed">
+            Let&apos;s build something meaningful together.{" "}
+            <a
+              href="#contact"
+              className="text-white font-semibold underline underline-offset-4 hover:text-gray-300 transition-colors"
+            >
+              Get in touch →
+            </a>
+          </p>
+        </div>
+
       </div>
 
-      {/* ================= CSS ANIMATION UTILS ================= */}
+      {/* ── Animation CSS ─────────────────────────────────── */}
       <style>{`
-        .show-content {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
+        .ab-item {
+          opacity: 0;
+          transform: translateX(-28px);
+          transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .show-line {
-          opacity: 1 !important;
+        .ab-item.ab-visible {
+          opacity: 1;
+          transform: translateX(0);
         }
       `}</style>
     </div>

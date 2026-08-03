@@ -69,7 +69,7 @@ const ProjectCard = ({ project }) => (
     target="_blank" 
     rel="noopener noreferrer"
     // CHANGED: Width reduced to w-64 (mobile) and w-72 (PC). Padding reduced to p-4.
-    className="flex-shrink-0 w-64 md:w-72 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mx-3 hover:bg-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden"
+    className="flex-shrink-0 w-56 sm:w-64 md:w-72 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mx-2 sm:mx-3 hover:bg-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden"
   >
     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -112,12 +112,8 @@ const ProjectCard = ({ project }) => (
 
 const GitHubProjects = () => {
   return (
-    <div className="reveal-section relative bg-black py-16 overflow-hidden">
-      
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-         <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-purple-900/10 rounded-full blur-[100px]"></div>
-         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-900/10 rounded-full blur-[100px]"></div>
-      </div>
+    <div className="reveal-section relative bg-[#050505] py-16 overflow-hidden">
+
 
       <div className="relative z-10 text-center mb-10 px-4">
         <div className="inline-block px-3 py-1 mb-3 rounded-full border border-white/10 bg-white/5 text-gray-400 text-[10px] font-medium uppercase tracking-widest">
@@ -131,8 +127,8 @@ const GitHubProjects = () => {
       <div className="flex flex-col gap-6">
         
         {/* ROW 1: Scroll LEFT */}
-        <div className="relative w-full overflow-hidden mask-gradient">
-          <div className="flex items-center animate-scroll-left whitespace-nowrap">
+        <div className="relative w-full overflow-hidden" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', contain: 'layout' }}>
+          <div className="flex items-center animate-scroll-left whitespace-nowrap" style={{ willChange: 'transform' }}>
             {[...firstRow, ...firstRow, ...firstRow, ...firstRow].map((project, index) => (
               <ProjectCard key={`row1-${index}`} project={project} />
             ))}
@@ -140,8 +136,8 @@ const GitHubProjects = () => {
         </div>
 
         {/* ROW 2: Scroll RIGHT */}
-        <div className="relative w-full overflow-hidden mask-gradient">
-          <div className="flex items-center animate-scroll-right whitespace-nowrap">
+        <div className="relative w-full overflow-hidden" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', contain: 'layout' }}>
+          <div className="flex items-center animate-scroll-right whitespace-nowrap" style={{ willChange: 'transform' }}>
             {[...secondRow, ...secondRow, ...secondRow, ...secondRow].map((project, index) => (
               <ProjectCard key={`row2-${index}`} project={project} />
             ))}

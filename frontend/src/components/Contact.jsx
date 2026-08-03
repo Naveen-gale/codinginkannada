@@ -43,16 +43,12 @@ const Contact = () => {
   return (
     <div
       id="contact"
-      className="reveal-section relative min-h-screen bg-black flex items-center justify-center py-24 px-4 md:px-8 overflow-hidden"
+      className="reveal-section relative min-h-screen bg-[#050505] flex items-center justify-center py-20 px-4 sm:px-6 md:px-8 overflow-hidden"
     >
 
-      {/* Background Decor */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-      </div>
 
-      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
         {/* ================= LEFT SIDE: INFO ================= */}
         <div className="space-y-8">
@@ -61,8 +57,8 @@ const Contact = () => {
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
               Get in touch
             </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-4">
-              Let's build something <br />
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+              Let's build something <br className="hidden sm:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
                 extraordinary.
               </span>

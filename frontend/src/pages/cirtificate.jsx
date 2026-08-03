@@ -49,14 +49,10 @@ const Certifications = () => {
   return (
     <div
       id="certifications"
-      className="reveal-section relative min-h-screen bg-black py-24 px-4 md:px-8 overflow-hidden"
+      className="reveal-section relative min-h-screen bg-[#050505] py-24 px-4 sm:px-6 md:px-8 overflow-hidden"
     >
 
-      {/* Background Decor */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-      </div>
+
 
       <div className="relative z-10 max-w-6xl mx-auto">
         
@@ -66,8 +62,8 @@ const Certifications = () => {
             <CheckCircle2 size={14} />
             Achievements
           </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-            Certifications 
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
+            Certifications
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Recognition of my technical skills, participation, and professional development.

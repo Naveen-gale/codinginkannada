@@ -22,10 +22,11 @@ const HeroSec = () => {
   return (
     <div
       id="home"
-      className={`relative min-h-[85vh] md:min-h-screen flex items-center justify-center bg-[#050505] pt-24 md:pt-20 selection:bg-blue-500/30 selection:text-white transition-opacity duration-700 ease-in ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+      className={`relative min-h-[100svh] flex items-center justify-center bg-[#050505] pt-20 pb-14 md:pt-20 md:pb-0 selection:bg-blue-500/30 selection:text-white transition-opacity duration-700 ease-in ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+      style={{ willChange: 'opacity' }}
     >
-      <div className="max-w-7xl mx-auto px-6 w-full">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* ================= LEFT SIDE (Text & CTA) ================= */}
           <div className="flex flex-col space-y-8 z-10">
@@ -42,7 +43,7 @@ const HeroSec = () => {
                 </div>
 
                 {/* Hero Headline */}
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
+                <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight">
                   Hi, I'm <br />
                   <span className="text-blue-500">
                     Naveen
@@ -50,7 +51,7 @@ const HeroSec = () => {
                 </h1>
 
                 {/* Bio */}
-                <p className="text-gray-400 mt-5 text-base md:text-lg max-w-lg leading-relaxed">
+                <p className="text-gray-400 mt-4 text-sm sm:text-base md:text-lg max-w-lg leading-relaxed">
                   Specializing in MERN Stack, Python, and C/C++. <br className="hidden md:block" />
                   Creator & Developer behind <span className="font-medium text-gray-200">codinginkannada</span> <VerifiedBadge />
                 </p>
@@ -61,22 +62,22 @@ const HeroSec = () => {
                 <img
                   src={photo}
                   alt="Naveen"
-                  className="w-32 h-32 sm:w-44 sm:h-44 object-cover rounded-2xl border border-gray-800 shadow-lg"
+                  className="w-28 h-36 sm:w-36 sm:h-44 object-cover object-top rounded-2xl border border-gray-800 shadow-lg"
                 />
               </div>
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
+            <div className="flex flex-col xs:flex-row sm:flex-row gap-4 w-full pt-2">
               <a
                 href="#projects"
-                className="px-8 py-3.5 bg-white text-black font-bold rounded-xl text-center hover:bg-gray-200 transition-colors duration-200"
+                className="flex-1 sm:flex-none px-8 py-3.5 bg-white text-black font-bold rounded-xl text-center hover:bg-gray-200 transition-colors duration-200"
               >
                 View Work
               </a>
               <a
                 href="#contact"
-                className="px-8 py-3.5 border border-gray-700 text-white font-medium rounded-xl text-center hover:bg-gray-800 transition-colors duration-200"
+                className="flex-1 sm:flex-none px-8 py-3.5 border border-gray-700 text-white font-medium rounded-xl text-center hover:bg-gray-800 transition-colors duration-200"
               >
                 Contact Me
               </a>
@@ -85,11 +86,11 @@ const HeroSec = () => {
             {/* Tech Stack */}
             <div className="pt-4">
               <p className="text-gray-500 text-xs uppercase mb-4 tracking-widest font-semibold">Tech Arsenal</p>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-wrap gap-2">
                 {TECH_STACK.map((skill) => (
                   <div
                     key={skill}
-                    className="px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-sm font-medium hover:border-gray-600 transition-colors cursor-default"
+                    className="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 text-sm font-medium hover:border-gray-600 transition-colors cursor-default"
                   >
                     {skill}
                   </div>
@@ -98,36 +99,31 @@ const HeroSec = () => {
             </div>
           </div>
 
-          {/* ================= RIGHT SIDE (Static Image) ================= */}
+          {/* ================= RIGHT SIDE (Photo) ================= */}
           <div className="hidden md:flex justify-end relative">
-            <div className="relative w-80 h-80 lg:w-[420px] lg:h-[420px]">
+            <div className="relative w-72 lg:w-[360px]">
 
-              {/* Main Image Container */}
-              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-gray-800 bg-[#0a0a0a] shadow-2xl transition-transform duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+              {/* Main Image — natural portrait ratio */}
+              <div className="relative w-full rounded-3xl overflow-hidden border border-gray-800 bg-[#0a0a0a] shadow-2xl transition-transform duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                 <img
                   src={photo}
                   alt="Naveen - Developer"
-                  className="w-full h-full object-cover opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-500 ease-out"
+                  className="w-full h-auto object-cover object-top opacity-95 hover:opacity-100 hover:scale-105 transition-all duration-500 ease-out"
                 />
               </div>
 
-              {/* Floating Badge (Simplified) */}
-              <div className="absolute -bottom-6 -left-8 md:-left-12 bg-black/70 backdrop-blur-md border border-gray-800/80 p-4 rounded-2xl shadow-2xl flex items-center gap-4 transition-transform duration-500 hover:-translate-y-1">
-  
-  {/* Sleek Code Icon container */}
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-900 border border-gray-700/50 text-blue-500 shadow-inner">
-    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-    </svg>
-  </div>
-
-  {/* Text Content */}
-  <div className="flex flex-col pr-2">
-    <span className="text-gray-100 text-sm font-bold tracking-wide">Developer</span>
-    <span className="text-gray-400 text-xs mt-0.5">MERN & Python</span>
-  </div>
-  
-</div>
+              {/* Floating Badge */}
+              <div className="absolute -bottom-5 -left-8 md:-left-10 bg-black/80 backdrop-blur-md border border-gray-800/80 p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transition-transform duration-500 hover:-translate-y-1">
+                <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-900 border border-gray-700/50 text-blue-500 shadow-inner">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-100 text-sm font-bold tracking-wide">Developer</span>
+                  <span className="text-gray-400 text-xs mt-0.5">MERN &amp; Python</span>
+                </div>
+              </div>
 
             </div>
           </div>

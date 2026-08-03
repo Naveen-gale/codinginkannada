@@ -64,14 +64,10 @@ const Projects = () => {
   return (
     <div
       id="projects"
-      className="reveal-section relative min-h-screen bg-black py-24 px-4 md:px-8 overflow-hidden"
+      className="reveal-section relative min-h-screen bg-[#050505] py-24 px-4 sm:px-6 md:px-8 overflow-hidden"
     >
 
-      {/* Dynamic Background Atmosphere */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-      </div>
+
 
       <div className="relative z-10 max-w-6xl mx-auto">
 
@@ -81,16 +77,16 @@ const Projects = () => {
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
             My Work
           </div>
-          <h2 className="text-4xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight leading-tight">
             Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500">Projects</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl text-lg md:text-xl font-light leading-relaxed">
+          <p className="text-gray-400 max-w-2xl text-base md:text-xl font-light leading-relaxed">
             Innovative web applications built with modern technologies, focusing on performance, scalability, and user experience.
           </p>
         </div>
 
         {/* Projects Showcase */}
-        <div className="flex flex-col gap-24 md:gap-32">
+        <div className="flex flex-col gap-16 md:gap-28">
           {projectsData.map((project, index) => (
             <div
               key={project.id}

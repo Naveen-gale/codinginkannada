@@ -32,15 +32,18 @@ const skills = [
   { name: 'C', color: '#A8B9CC', level: 'Academic', type: 'Language', icon: Cpu },
   { name: 'C++', color: '#00599C', level: 'Academic', type: 'Language', icon: Cpu },
   { name: 'Tailwind', color: '#38BDF8', level: 'Expert', type: 'Frontend', icon: Layout },
+  {name:'java', color:'#ea940a' , level:'Beginner', type:'Language', icon:Code2},
   { name: 'Flutter', color: '#02569B', level: 'Beginner', type: 'Mobile', icon: Smartphone },
   { name: 'Dart', color: '#0175C2', level: 'Beginner', type: 'Language', icon: Code2 },
 
-  { name: 'NumPy', color: '#013243', level: 'Beginner', type: 'Data Science', icon: Grid },
+  { name: 'NumPy', color: '#ed970d', level: 'Beginner', type: 'Data Science', icon: Grid },
   { name: 'Pandas', color: '#150458', level: 'Beginner', type: 'Data Science', icon: Table2 },
   { name: 'Matplotlib', color: '#11557C', level: 'Beginner', type: 'Visualization', icon: LineChart },
   { name: 'Seaborn', color: '#4C72B0', level: 'Beginner', type: 'Visualization', icon: BarChart3 },
-  { name: 'Machine Learning', color: '#FF6F00', level: 'Beginner', type: 'ML', icon: Brain },
-  { name: 'Deep Learning', color: '#9C27B0', level: 'Beginner', type: 'Deep Learning', icon: Network }
+  { name: 'Machine Learning', color: '#FF6F00', level: 'intermediate', type: 'ML', icon: Brain },
+  { name: 'Deep Learning', color: '#9C27B0', level: 'intermediate', type: 'Deep Learning', icon: Network },
+  {name :'gen ai ', color:'#62615f', level:'intermediate', type:'AI', icon:Brain}
+
 ];
 
 const Skill = () => {

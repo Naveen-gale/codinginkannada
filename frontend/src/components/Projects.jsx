@@ -3,6 +3,9 @@ import { ExternalLink, X, AlertTriangle, ArrowRight, Code2, Server, Layout, Data
 import stylesyncImg from "../assets/stylesync.png";
 import photoShopImg from "../assets/photoshop.png";
 import karnatakaFcImg from "../assets/restaurant.png";
+import visiontextaiImg from "../assets/vitiontext.png";
+import { AiOutlineRobot } from 'react-icons/ai';
+import { Sparkles } from 'lucide-react';
 
 const projectsData = [
   {
@@ -41,6 +44,18 @@ const projectsData = [
     shadow: "shadow-blue-500/20",
     icon: <Code2 className="w-5 h-5" />
   },
+  {
+    id : 4,
+    title: "visiontextai",
+    category: "ppt maker",
+    tech: ["MERN Stack", "ml", "dl", "python", "flask", "generative ai", "llm", "mogodb"],
+    image:visiontextaiImg,
+   description:" An AI-powered PPT maker that generates structured presentation content, slide layouts, designs, and visuals from a simple topic or prompt. Built with a Flask backend and modern interactive UI.",
+    link: "https://visiontextai.vercel.app/",
+    color: "from-blue-400 to-cyan-500",
+    shadow: "shadow-blue-500/20",
+    icon: <AiOutlineRobot className="w-5 h-5 text-gray-700" />
+  }
 ];
 
 const Projects = () => {

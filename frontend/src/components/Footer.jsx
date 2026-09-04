@@ -12,7 +12,7 @@ const Footer = () => {
 
   const socialLinks = [
     { name: "GitHub",    icon: <Github size={18} />,    href: "https://github.com/Naveen-gale",           hoverClass: "hover:text-white"     },
-    { name: "Instagram", icon: <Instagram size={18} />, href: "https://instagram.com/codinginkannada",    hoverClass: "hover:text-pink-400"  },
+    { name: "Instagram", icon: <Instagram size={18} />, href: "https://instagram.com/n99av80n",    hoverClass: "hover:text-pink-400"  },
     { name: "Email",     icon: <Mail size={18} />,      href: "mailto:galennaver@gmail.com",              hoverClass: "hover:text-blue-400"  },
   ];
 

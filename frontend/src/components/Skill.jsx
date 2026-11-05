@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import {
   Code2,
   Database,
@@ -99,7 +99,7 @@ const Skill = () => {
         const scale = (z + 2) / 3;
         const opacity = Math.max(0.15, Math.min(1, scale));
 
-        // Only transform + opacity — no filter (filter forces full repaint every frame)
+        // Only transform + opacity â€” no filter (filter forces full repaint every frame)
         item.style.transform = `translate3d(${x * radius}px, ${y * radius}px, 0) scale(${scale})`;
         item.style.opacity = opacity;
         item.style.zIndex = Math.floor(scale * 100);
@@ -157,7 +157,7 @@ const Skill = () => {
 
       {/* Dynamic Background Glow based on Hover */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] transition-colors duration-700 pointer-events-none opacity-20"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[80px] transition-colors duration-700 pointer-events-none opacity-15"
         style={{ backgroundColor: hoveredSkill ? hoveredSkill.color : 'transparent' }}
       ></div>
 
@@ -170,7 +170,7 @@ const Skill = () => {
           Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Skills</span>
         </h2>
         <p className="text-gray-500 text-sm mt-3 uppercase tracking-widest animate-pulse">
-          Drag sphere • Hover to inspect
+          Drag sphere â€¢ Hover to inspect
         </p>
       </div>
 
@@ -209,11 +209,12 @@ const Skill = () => {
               {/* The Premium Glass Tag */}
               <div
                 className={`
-                  group relative pl-3 pr-5 py-2.5 border backdrop-blur-xl rounded-2xl flex items-center gap-3 
-                  transition-all duration-300 transform shadow-2xl
+                  group relative pl-3 pr-5 py-2.5 border rounded-2xl flex items-center gap-3
+                  transform-gpu will-change-transform
+                  transition-[transform,background-color,border-color,box-shadow] duration-300
                   ${hoveredSkill?.name === skill.name
                     ? 'scale-125 bg-white/20 border-white/40 z-50 ring-2 ring-white/20'
-                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'}
+                    : 'bg-white/8 border-white/10 hover:bg-white/12 hover:border-white/20'}
                 `}
                 style={{
                   boxShadow: hoveredSkill?.name === skill.name ? `0 0 40px ${skill.color}50` : `0 4px 10px rgba(0,0,0,0.3)`

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Folder, GitFork, Star, ArrowUpRight, Github } from "lucide-react";
 
 const GITHUB_USERNAME = "Naveen-gale";
@@ -38,67 +38,20 @@ const ProjectCard = ({ project }) => {
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="
-        flex-shrink-0
-        w-56 sm:w-64 md:w-72
-        p-4
-        rounded-xl
-        bg-white/5
-        border border-white/10
-        backdrop-blur-md
-        mx-2 sm:mx-3
-        hover:bg-white/10
-        hover:border-blue-500/30
-        transition-all
-        group
-        relative
-        overflow-hidden
-      "
+      className="flex-shrink-0 w-56 sm:w-64 md:w-72 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mx-2 sm:mx-3 hover:bg-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden whitespace-normal"
     >
       {/* Hover Glow */}
-      <div
-        className="
-          absolute inset-0
-          bg-gradient-to-r
-          from-blue-600/0
-          via-blue-600/10
-          to-purple-600/0
-          opacity-0
-          group-hover:opacity-100
-          transition-opacity
-          duration-500
-        "
-      />
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Header */}
       <div className="flex items-center justify-between mb-3 relative z-10">
         <div className="flex items-center gap-2 min-w-0">
-          <div
-            className="
-              p-1.5
-              rounded-lg
-              bg-white/5
-              text-blue-400
-              group-hover:text-white
-              group-hover:bg-blue-600
-              transition-colors
-              shadow-inner
-              flex-shrink-0
-            "
-          >
+          <div className="p-1.5 rounded-lg bg-white/5 text-blue-400 group-hover:text-white group-hover:bg-blue-600 transition-colors shadow-inner flex-shrink-0">
             <Folder size={16} />
           </div>
 
           <h3
-            className="
-              text-white
-              font-bold
-              text-sm
-              tracking-wide
-              group-hover:text-blue-300
-              transition-colors
-              truncate
-            "
+            className="text-white font-bold text-sm tracking-wide group-hover:text-blue-300 transition-colors truncate"
             title={project.name}
           >
             {project.name}
@@ -107,55 +60,24 @@ const ProjectCard = ({ project }) => {
 
         <ArrowUpRight
           size={14}
-          className="
-            text-gray-500
-            group-hover:text-white
-            transition-colors
-            flex-shrink-0
-          "
+          className="text-gray-500 group-hover:text-white transition-colors flex-shrink-0"
         />
       </div>
 
       {/* Description */}
       <p
-        className="
-          text-gray-400
-          text-xs
-          leading-relaxed
-          mb-4
-          h-8
-          line-clamp-2
-          relative
-          z-10
-        "
+        className="text-gray-400 text-xs leading-relaxed mb-4 h-8 line-clamp-2 relative z-10"
         title={project.desc}
       >
         {project.desc}
       </p>
 
       {/* Bottom */}
-      <div
-        className="
-          flex
-          items-center
-          justify-between
-          mt-auto
-          relative
-          z-10
-          pt-3
-          border-t
-          border-white/5
-        "
-      >
+      <div className="flex items-center justify-between mt-auto relative z-10 pt-3 border-t border-white/5">
         {/* Language */}
         <div className="flex items-center gap-2">
           <span
-            className="
-              w-2
-              h-2
-              rounded-full
-              shadow-[0_0_8px_currentColor]
-            "
+            className="w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]"
             style={{
               backgroundColor: project.color,
               color: project.color,
@@ -188,6 +110,11 @@ const GitHubProjects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const row1Ref = useRef(null);
+  const row2Ref = useRef(null);
+  const pauseRow1Ref = useRef(false);
+  const pauseRow2Ref = useRef(false);
 
   useEffect(() => {
     const fetchRepositories = async () => {
@@ -233,56 +160,81 @@ const GitHubProjects = () => {
 
   // Split repositories between two rows
   const firstRow = projects.filter((_, index) => index % 2 === 0);
-  const secondRow = projects.filter((_, index) => index % 2 !== 0);
+  const secondRow =
+    projects.length > 1
+      ? projects.filter((_, index) => index % 2 !== 0)
+      : projects;
+
+  // Repeat 4x so both halves of the track are wider than any screen
+  const firstRowLoop = [...firstRow, ...firstRow, ...firstRow, ...firstRow];
+  const secondRowLoop = [...secondRow, ...secondRow, ...secondRow, ...secondRow];
+
+  // GPU-accelerated opposite-direction scroll loop
+  useEffect(() => {
+    if (loading || error || projects.length === 0) return;
+
+    let animationFrameId;
+    let x1 = 0;
+    let x2 = null; // Initialized once DOM width is measured
+    let lastTime = performance.now();
+    const speed = 45; // Pixels per second (adjust higher for faster, lower for slower)
+
+    const animate = (now) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
+      const el1 = row1Ref.current;
+      const el2 = row2Ref.current;
+
+      // ROW 1 -> Moves LEFT (0 to -halfWidth)
+      if (el1) {
+        const halfWidth1 = el1.scrollWidth / 2;
+        if (halfWidth1 > 0 && !pauseRow1Ref.current) {
+          x1 -= speed * dt;
+          if (Math.abs(x1) >= halfWidth1) {
+            x1 += halfWidth1;
+          }
+          el1.style.transform = `translate3d(${x1}px, 0, 0)`;
+        }
+      }
+
+      // ROW 2 -> Moves RIGHT / OPPOSITE (-halfWidth to 0)
+      if (el2) {
+        const halfWidth2 = el2.scrollWidth / 2;
+        if (halfWidth2 > 0) {
+          if (x2 === null) {
+            x2 = -halfWidth2;
+          }
+          if (!pauseRow2Ref.current) {
+            x2 += speed * dt;
+            if (x2 >= 0) {
+              x2 -= halfWidth2;
+            }
+            el2.style.transform = `translate3d(${x2}px, 0, 0)`;
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [loading, error, projects]);
 
   return (
     <div className="reveal-section relative bg-[#050505] py-16 overflow-hidden">
       {/* ================= HEADER ================= */}
-
       <div className="relative z-10 text-center mb-10 px-4">
-        <div
-          className="
-            inline-flex
-            items-center
-            gap-2
-            px-3
-            py-1
-            mb-3
-            rounded-full
-            border
-            border-white/10
-            bg-white/5
-            text-gray-400
-            text-[10px]
-            font-medium
-            uppercase
-            tracking-widest
-          "
-        >
+        <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full border border-white/10 bg-white/5 text-gray-400 text-[10px] font-medium uppercase tracking-widest">
           <Github size={12} />
-
           Codebase
         </div>
 
-        <h2
-          className="
-            text-3xl
-            md:text-4xl
-            font-bold
-            text-white
-            tracking-tight
-          "
-        >
+        <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
           GitHub{" "}
-          <span
-            className="
-              text-transparent
-              bg-clip-text
-              bg-gradient-to-r
-              from-blue-400
-              to-purple-500
-            "
-          >
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
             Repositories
           </span>
         </h2>
@@ -293,50 +245,25 @@ const GitHubProjects = () => {
       </div>
 
       {/* ================= LOADING ================= */}
-
       {loading && (
         <div className="flex justify-center items-center py-10">
           <div className="flex items-center gap-3 text-gray-400 text-sm">
-            <div
-              className="
-                w-4
-                h-4
-                border-2
-                border-gray-600
-                border-t-blue-400
-                rounded-full
-                animate-spin
-              "
-            />
-
+            <div className="w-4 h-4 border-2 border-gray-600 border-t-blue-400 rounded-full animate-spin" />
             Loading repositories...
           </div>
         </div>
       )}
 
       {/* ================= ERROR ================= */}
-
       {!loading && error && (
         <div className="flex justify-center py-10">
-          <div
-            className="
-              px-5
-              py-3
-              rounded-xl
-              bg-red-500/10
-              border
-              border-red-500/20
-              text-red-400
-              text-sm
-            "
-          >
+          <div className="px-5 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
             {error}
           </div>
         </div>
       )}
 
       {/* ================= EMPTY ================= */}
-
       {!loading && !error && projects.length === 0 && (
         <div className="text-center text-gray-500 py-10">
           No repositories found.
@@ -344,14 +271,13 @@ const GitHubProjects = () => {
       )}
 
       {/* ================= PROJECT SLIDER ================= */}
-
       {!loading && !error && projects.length > 0 && (
         <div className="flex flex-col gap-6">
-
-          {/* ================= ROW 1 ================= */}
-
+          {/* ================= ROW 1 (Moves Left ⬅️) ================= */}
           <div
             className="relative w-full overflow-hidden"
+            onMouseEnter={() => (pauseRow1Ref.current = true)}
+            onMouseLeave={() => (pauseRow1Ref.current = false)}
             style={{
               maskImage:
                 "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
@@ -360,15 +286,10 @@ const GitHubProjects = () => {
             }}
           >
             <div
-              className="
-                flex
-                items-center
-                animate-scroll-left
-                whitespace-nowrap
-              "
+              ref={row1Ref}
+              className="flex items-center w-max will-change-transform"
             >
-              {/* Duplicate row for seamless animation */}
-              {[...firstRow, ...firstRow].map((project, index) => (
+              {firstRowLoop.map((project, index) => (
                 <ProjectCard
                   key={`row1-${project.repo}-${index}`}
                   project={project}
@@ -377,10 +298,11 @@ const GitHubProjects = () => {
             </div>
           </div>
 
-          {/* ================= ROW 2 ================= */}
-
+          {/* ================= ROW 2 (Moves Right ➡️) ================= */}
           <div
             className="relative w-full overflow-hidden"
+            onMouseEnter={() => (pauseRow2Ref.current = true)}
+            onMouseLeave={() => (pauseRow2Ref.current = false)}
             style={{
               maskImage:
                 "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
@@ -389,15 +311,10 @@ const GitHubProjects = () => {
             }}
           >
             <div
-              className="
-                flex
-                items-center
-                animate-scroll-right
-                whitespace-nowrap
-              "
+              ref={row2Ref}
+              className="flex items-center w-max will-change-transform"
             >
-              {/* Duplicate row for seamless animation */}
-              {[...secondRow, ...secondRow].map((project, index) => (
+              {secondRowLoop.map((project, index) => (
                 <ProjectCard
                   key={`row2-${project.repo}-${index}`}
                   project={project}
@@ -409,97 +326,20 @@ const GitHubProjects = () => {
       )}
 
       {/* ================= VIEW GITHUB ================= */}
-
       {!loading && (
         <div className="relative z-10 flex justify-center mt-10">
           <a
             href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              inline-flex
-              items-center
-              gap-2
-              px-5
-              py-2.5
-              rounded-full
-              border
-              border-white/10
-              bg-white/5
-              text-gray-300
-              text-sm
-              hover:bg-white/10
-              hover:text-white
-              hover:border-blue-500/30
-              transition-all
-            "
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 text-gray-300 text-sm hover:bg-white/10 hover:text-white hover:border-blue-500/30 transition-all"
           >
             <Github size={16} />
-
             View All Repositories
-
             <ArrowUpRight size={14} />
           </a>
         </div>
       )}
-
-      {/* ================= ANIMATIONS ================= */}
-
-      <style>{`
-        @keyframes scrollLeft {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-
-          to {
-            transform: translate3d(-50%, 0, 0);
-          }
-        }
-
-        @keyframes scrollRight {
-          from {
-            transform: translate3d(-50%, 0, 0);
-          }
-
-          to {
-            transform: translate3d(0, 0, 0);
-          }
-        }
-
-        .animate-scroll-left {
-          width: max-content;
-          animation: scrollLeft 80s linear infinite;
-          will-change: transform;
-        }
-
-        .animate-scroll-right {
-          width: max-content;
-          animation: scrollRight 80s linear infinite;
-          will-change: transform;
-        }
-
-        .animate-scroll-left:hover,
-        .animate-scroll-right:hover {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 640px) {
-          .animate-scroll-left {
-            animation-duration: 35s;
-          }
-
-          .animate-scroll-right {
-            animation-duration: 35s;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-scroll-left,
-          .animate-scroll-right {
-            animation: none;
-          }
-        }
-      `}</style>
     </div>
   );
 };

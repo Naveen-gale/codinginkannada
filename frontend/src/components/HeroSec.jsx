@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import photo from "../assets/naveen2.png";
 
 const TECH_STACK = ["Node.js", "Express", "Python", "React", "C", "C++"];
@@ -11,17 +11,24 @@ const VerifiedBadge = () => (
 );
 
 const HeroSec = () => {
-  // Simple state for a clean fade-in on mount
+  // Ref-based approach: apply will-change only during the brief fade-in then remove it,
+  // so the element doesn't permanently occupy a GPU compositing layer.
+  const heroRef = React.useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoaded(true);
+    // Drop will-change after the transition completes (~700 ms) to free the GPU layer
+    const timer = setTimeout(() => {
+      if (heroRef.current) heroRef.current.style.willChange = 'auto';
+    }, 800);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
       id="home"
+      ref={heroRef}
       className={`relative min-h-[100svh] flex items-center justify-center bg-[#050505] pt-20 pb-14 md:pt-20 md:pb-0 selection:bg-blue-500/30 selection:text-white transition-opacity duration-700 ease-in ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       style={{ willChange: 'opacity' }}
     >
@@ -113,7 +120,7 @@ const HeroSec = () => {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-5 -left-8 md:-left-10 bg-black/80 backdrop-blur-md border border-gray-800/80 p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transition-transform duration-500 hover:-translate-y-1">
+              <div className="absolute -bottom-5 -left-8 md:-left-10 bg-black/85 border border-gray-800/80 p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transform-gpu transition-transform duration-500 hover:-translate-y-1">
                 <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-900 border border-gray-700/50 text-blue-500 shadow-inner">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />

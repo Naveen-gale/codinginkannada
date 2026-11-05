@@ -44,6 +44,25 @@ video {
   color: #fff;
 }
 
+/* ── About section scroll-reveal ─────────────────────────
+   Defined here (not via inline <style> in JSX) so the browser
+   parses this once at load time and never re-parses on renders.
+   Uses translate3d (GPU compositor path) instead of translateX
+   so the browser never has to do a layout recalculation.        */
+.ab-item {
+  opacity: 0;
+  transform: translate3d(-28px, 0, 0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+.ab-item.ab-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  /* Auto-clear will-change once animation settles (saves GPU memory) */
+  will-change: auto;
+}
+
 /* ── Reduce motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,

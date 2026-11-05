@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { ExternalLink, X, AlertTriangle, ArrowRight, Code2, Server, Layout, Database } from "lucide-react";
 import stylesyncImg from "../assets/stylesync.png";
 import photoShopImg from "../assets/photoshop.png";
@@ -45,12 +45,12 @@ const projectsData = [
     icon: <Code2 className="w-5 h-5" />
   },
   {
-    id : 4,
+    id: 4,
     title: "visiontextai",
     category: "ppt maker",
     tech: ["MERN Stack", "ml", "dl", "python", "flask", "generative ai", "llm", "mogodb"],
-    image:visiontextaiImg,
-   description:" An AI-powered PPT maker that generates structured presentation content, slide layouts, designs, and visuals from a simple topic or prompt. Built with a Flask backend and modern interactive UI.",
+    image: visiontextaiImg,
+    description: " An AI-powered PPT maker that generates structured presentation content, slide layouts, designs, and visuals from a simple topic or prompt. Built with a Flask backend and modern interactive UI.",
     link: "https://visiontextai.vercel.app/",
     color: "from-blue-400 to-cyan-500",
     shadow: "shadow-blue-500/20",
@@ -81,14 +81,11 @@ const Projects = () => {
       id="projects"
       className="reveal-section relative min-h-screen bg-[#050505] py-24 px-4 sm:px-6 md:px-8 overflow-hidden"
     >
-
-
-
       <div className="relative z-10 max-w-6xl mx-auto">
 
         {/* Section Header */}
         <div className="mb-24 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 text-blue-400 text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-lg">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 text-blue-400 text-xs font-bold uppercase tracking-widest">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
             My Work
           </div>
@@ -105,31 +102,31 @@ const Projects = () => {
           {projectsData.map((project, index) => (
             <div
               key={project.id}
-              className={`group relative flex flex-col md:flex-row gap-10 md:gap-20 items-center 
+              className={`relative flex flex-col md:flex-row gap-10 md:gap-20 items-center 
                 ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
             >
 
-              {/* IMAGE CARD (3D Effect) */}
-              <div className="w-full md:w-3/5 perspective-1000">
-                <div className={`relative aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 transform group-hover:rotate-1 group-hover:scale-[1.02] ${project.shadow}`}>
+              {/* IMAGE CARD (Only Image Smooth Hover - No Box Shadow) */}
+              <div className="w-full md:w-3/5">
+                <div className="group/img relative aspect-video rounded-3xl overflow-hidden border border-white/10 transform-gpu will-change-transform transition-transform duration-500 ease-out hover:scale-[1.02]">
 
                   {/* Glass Sheen Overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-10 mix-blend-overlay`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-0 group-hover/img:opacity-20 transition-opacity duration-500 ease-out z-10 mix-blend-overlay pointer-events-none`}></div>
 
                   <img
                     src={project.image}
                     alt={`${project.title} - ${project.category} project by Naveen`}
                     loading="lazy"
-                    className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
+                    decoding="async"
+                    className="w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-700 ease-out group-hover/img:scale-105"
                   />
 
                   {/* Floating Tech Stack (Bottom Left) */}
                   <div className="absolute bottom-4 left-4 z-20 flex flex-wrap gap-2 pr-4">
-                    {project.tech.map((t, i) => (
+                    {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-black/60 border border-white/10 backdrop-blur-xl rounded-lg shadow-lg transform transition-transform duration-500 hover:-translate-y-1"
-                        style={{ transitionDelay: `${i * 100}ms` }}
+                        className="px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-black/70 border border-white/10 rounded-lg"
                       >
                         {t}
                       </span>
@@ -138,10 +135,10 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* TEXT INFO CARD */}
+              {/* TEXT INFO CARD (Static - Only Button Hovers) */}
               <div className="w-full md:w-2/5 flex flex-col justify-center text-left">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-2.5 rounded-xl bg-gradient-to-br ${project.color} bg-opacity-20 text-white shadow-lg`}>
+                  <div className={`p-2.5 rounded-xl bg-gradient-to-br ${project.color} bg-opacity-20 text-white`}>
                     {project.icon}
                   </div>
                   <span className={`text-sm font-bold uppercase tracking-widest bg-gradient-to-r ${project.color} bg-clip-text text-transparent`}>
@@ -149,7 +146,7 @@ const Projects = () => {
                   </span>
                 </div>
 
-                <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 group-hover:text-blue-200 transition-colors leading-tight">
+                <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                   {project.title}
                 </h3>
 
@@ -160,10 +157,10 @@ const Projects = () => {
                 <div className="flex flex-wrap gap-4">
                   <button
                     onClick={() => handleOpenWarning(project)}
-                    className="group/btn relative px-8 py-3.5 rounded-full bg-white text-black font-bold text-sm overflow-hidden transition-all duration-300 hover:bg-blue-500 hover:text-white hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-1"
+                    className="group/btn relative px-8 py-3.5 rounded-full bg-white text-black font-bold text-sm overflow-hidden transform-gpu will-change-transform transition-[transform,background-color,color] duration-300 ease-out hover:bg-blue-500 hover:text-white hover:-translate-y-1 active:scale-95"
                   >
                     <span className="relative z-10 flex items-center gap-2">
-                      Live Demo <ExternalLink size={16} />
+                      Live Demo <ExternalLink size={16} className="transform-gpu transition-transform duration-300 ease-out group-hover/btn:translate-x-1 group-hover/btn:-translate-y-0.5" />
                     </span>
                   </button>
                 </div>
@@ -180,15 +177,15 @@ const Projects = () => {
 
           {/* Animated Backdrop */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-xl transition-opacity duration-300"
+            className="absolute inset-0 bg-black/75 transition-opacity duration-300"
             onClick={handleClose}
           ></div>
 
           {/* Modal Box */}
-          <div className="relative bg-[#0a0a0a]/90 border border-white/10 rounded-3xl p-8 max-w-sm md:max-w-md w-full shadow-2xl transform transition-all animate-in fade-in zoom-in duration-300 ring-1 ring-white/5">
+          <div className="relative bg-[#0a0a0a]/95 border border-white/10 rounded-3xl p-8 max-w-sm md:max-w-md w-full transform-gpu transition-all animate-in fade-in zoom-in duration-200 ring-1 ring-white/5">
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-full"
+              className="absolute top-4 right-4 text-gray-500 hover:text-white transition-[color,background-color,transform] duration-200 bg-white/5 hover:bg-white/10 hover:rotate-90 active:scale-90 p-2 rounded-full transform-gpu"
             >
               <X size={20} />
             </button>
@@ -217,15 +214,15 @@ const Projects = () => {
               <div className="flex gap-4 w-full">
                 <button
                   onClick={handleClose}
-                  className="flex-1 py-3.5 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 transition-all font-medium text-sm"
+                  className="flex-1 py-3.5 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 hover:border-white/20 active:scale-95 transform-gpu transition-[color,background-color,border-color,transform] duration-200 font-medium text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleProceed}
-                  className="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-blue-500/30 hover:scale-105 transition-all text-sm flex items-center justify-center gap-2"
+                  className="group/modalbtn flex-1 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:scale-[1.03] active:scale-95 transform-gpu transition-transform duration-200 text-sm flex items-center justify-center gap-2"
                 >
-                  Visit Site <ArrowRight size={16} />
+                  Visit Site <ArrowRight size={16} className="transform-gpu transition-transform duration-200 group-hover/modalbtn:translate-x-1" />
                 </button>
               </div>
             </div>

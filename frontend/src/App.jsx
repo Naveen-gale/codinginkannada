@@ -7,10 +7,11 @@ import Projects from './components/Projects'
 import Certifications from './pages/cirtificate'
 import Contact from './components/Contact'
 import SmoothScroll from './components/SmoothScroll'
-import { useScrollReveal } from './utils/useScrollReveal'
 
 export const App = () => {
-  useScrollReveal('.reveal-section');
+  // Note: useScrollReveal is registered inside Home.jsx (which renders the section elements).
+  // Calling it here too would create duplicate ScrollTrigger instances on the same elements,
+  // causing double-firing animations and unnecessary observer overhead.
 
   return (
     <SmoothScroll>

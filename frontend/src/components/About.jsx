@@ -157,19 +157,8 @@ const About = () => {
 
       </div>
 
-      {/* ── Animation CSS ─────────────────────────────────── */}
-      <style>{`
-        .ab-item {
-          opacity: 0;
-          transform: translateX(-28px);
-          transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .ab-item.ab-visible {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      `}</style>
+      {/* ── Animation CSS is defined in index.css as .ab-item / .ab-visible
+              (moved out of JSX to avoid re-parsing on every render) ── */}
     </div>
   );
 };
